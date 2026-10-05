@@ -1,0 +1,10 @@
+{
+  "bbox": [-94.50, 41.40, -94.46, 41.44],
+  "crs": "EPSG:32615",
+  "resolution": 20,
+  "year": 2024,
+  "months": [4, 5, 6, 7, 8, 9, 10],
+  "collection": "sentinel-2-c1-l2a",
+  "allowed_scl": [4, 5, 6],
+  "minimum_common_fraction": 0.5
+}
