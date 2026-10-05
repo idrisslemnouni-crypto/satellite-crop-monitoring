@@ -1,3 +1,9 @@
+# Immediate publication — 2026-10-05
+
+The user explicitly requested publication of all remaining prepared projects now, superseding the prior daily cadence for this release. The recurring automation is paused. Repository: [idrisslemnouni-crypto/satellite-crop-monitoring](https://github.com/idrisslemnouni-crypto/satellite-crop-monitoring). Current workflow results are available at [GitHub Actions](https://github.com/idrisslemnouni-crypto/satellite-crop-monitoring/actions). The local verification below describes the pre-publication checkpoint; no new ML or field-validity claim is made.
+
+## Historical daily handoff
+
 # Ready for daily publication
 
 The user revised the request: build ten projects locally now, then publish at most one new repository per day. This satellite repository is locally verified; see verification.md. Do not publish before 6 October 2026 or if another new portfolio repository has already been published today in Africa/Casablanca.

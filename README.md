@@ -66,3 +66,8 @@ No API token or paid account is needed. The first run reads public COG windows; 
 Seven carefully selected clear observations undersample rapid events and do not measure monthly means. A rectangular landscape is not a crop-only mask; SCL can misclassify and bilinear resampling mixes boundaries. Sentinel reflectance and indices are proxies, not physiological measurements. Add independent parcel/crop labels, additional years and field measurements before interpreting crop-specific anomalies. No accuracy metric is applicable because there is no labeled prediction task.
 
 Developed with AI assistance. Results come from executed public data, with no invented observations or backdated history. Public GitHub CI will be checked on the scheduled publication day; it has not yet run for this local repository.
+
+
+## GitHub publication
+
+[Public repository](https://github.com/idrisslemnouni-crypto/satellite-crop-monitoring) · [Current CI results](https://github.com/idrisslemnouni-crypto/satellite-crop-monitoring/actions). Published following the user's explicit 5 October 2026 request to release the prepared portfolio together. Earlier local-verification notes describe the pre-publication checkpoint. Raw sources and trained artifacts remain excluded from Git; reproduction commands regenerate them.
