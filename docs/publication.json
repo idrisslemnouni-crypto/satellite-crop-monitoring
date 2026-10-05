@@ -1,0 +1,21 @@
+{
+  "description": "Seven real Sentinel-2 scenes with cloud masks, calibrated vegetation/water indices and georeferenced seasonal monitoring",
+  "topics": [
+    "agriculture",
+    "sentinel-2",
+    "remote-sensing",
+    "gis",
+    "rasterio",
+    "python"
+  ],
+  "issues": [
+    {
+      "title": "Validate field crop masks and observed agronomic conditions",
+      "body": "The demonstration includes a landscape footprint, not an identified crop parcel. Obtain rights-cleared crop masks and field observations before any crop-specific stress diagnosis or index-accuracy claim."
+    },
+    {
+      "title": "Extend phenology comparison across independent years",
+      "body": "Current seven scenes cover April\u2013October 2024. Predefine multi-year scene selection and assess missing-cloud periods and phenology variation without claiming yield or irrigation outcomes."
+    }
+  ]
+}
