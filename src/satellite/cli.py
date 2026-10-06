@@ -9,7 +9,7 @@ from satellite.pipeline import run
 
 def main():
     parser = argparse.ArgumentParser(description="Process fixed real Sentinel-2 scenes")
-    parser.add_argument("command", choices=["run", "discover"])
+    parser.add_argument("command", choices=["run", "discover", "quality"])
     parser.add_argument("--root", type=Path, default=Path.cwd())
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -18,6 +18,21 @@ def main():
     if args.command == "discover":
         config = json.loads((root / "configs/default.json").read_text())
         print(json.dumps(discover(config), indent=2))
+        return
+    if args.command == "quality":
+        from satellite.quality import run as run_quality
+
+        result = run_quality(root)
+        print(
+            json.dumps(
+                {
+                    "scenes": len(result["scenes"]),
+                    "common_pixels": result["common_pixels"],
+                    "common_fraction": result["common_fraction"],
+                },
+                indent=2,
+            )
+        )
         return
     result = run(root)
     print(

@@ -39,9 +39,29 @@ The projected grid is EPSG:32615, 172 × 226 pixels at 20 m. The common valid fo
 
 The curves summarize the same pixels at every date. Shading is the spatial 10–90% range, not confidence intervals. A seasonal rise and decline in greenness is consistent with changing vegetation cover, but these data alone do not identify crops or diagnose drought. Scene cloud percentage describes the full source tile; ROI coverage is calculated independently.
 
+## ROI quality and shared support
+
+`python -m satellite.cli quality` audits existing scene caches and index GeoTIFFs without downloading new data or replacing the original reports/rasters. Run the original pipeline first if those ignored local inputs are absent. The audit rejects stale cache fingerprints/hashes, mismatched shapes/georeferencing, or masks/common support that differ from historical evidence.
+
+Each ROI partitions exactly into rejected SCL, allowed SCL with nonfinite calibrated bands, undefined indices after finite bands, and scene-valid pixels. Scene-valid pixels then split into common support and valid pixels excluded because another date is invalid. Per-band/per-index diagnostic counts can overlap; they must not be added as independent losses. All twelve SCL class counts, actual cache hashes and validity fractions are recorded in [CSV](reports/scene-quality.csv) and [JSON](reports/scene-quality.json). Hectares use the affine pixel area only after confirming a projected metre CRS.
+
+| Scene date | Rejected SCL pixels | Scene-valid pixels | Valid here but outside common support |
+|---|---:|---:|---:|
+| 2024-04-15 | 94 | 38,778 | 58 |
+| 2024-05-25 | 78 | 38,794 | 74 |
+| 2024-06-09 | 50 | 38,822 | 102 |
+| 2024-07-24 | 10 | 38,862 | 142 |
+| 2024-08-31 | 52 | 38,820 | 100 |
+| 2024-09-30 | 0 | 38,872 | 152 |
+| 2024-10-05 | 0 | 38,872 | 152 |
+
+In this executed audit, nonfinite-band and undefined-index exclusions are both zero after the preceding filters. All 38,720 historical common pixels match, giving 99.60897% support and 1548.80 ha on the verified 20 m UTM grid. September and October have entirely valid ROIs but still lose 152 pixels when comparing all seven dates. This measures consistent data support; it does not validate SCL classification, crop identity or physiological stress. Test fixtures are synthetic; reported scene counts come from the actual cached observations.
+
+![ROI quality and support losses](reports/figures/scene-quality.png)
+
 ## Run locally
 
-Python 3.12 is required. Until daily publication, clone the supplied local repository or use its source archive. After publication, the same commands apply to its GitHub clone.
+Python 3.12 is required. Clone the linked public repository or use its source archive.
 
 ```bash
 python -m venv .venv
@@ -49,6 +69,7 @@ python -m venv .venv
 python -m pip install -r requirements-lock.txt
 python -m pip install --no-deps -e .
 python -m satellite.cli run
+python -m satellite.cli quality
 python -m pytest -q
 python -m ruff check .
 ```
@@ -65,7 +86,7 @@ No API token or paid account is needed. The first run reads public COG windows; 
 
 Seven carefully selected clear observations undersample rapid events and do not measure monthly means. A rectangular landscape is not a crop-only mask; SCL can misclassify and bilinear resampling mixes boundaries. Sentinel reflectance and indices are proxies, not physiological measurements. Add independent parcel/crop labels, additional years and field measurements before interpreting crop-specific anomalies. No accuracy metric is applicable because there is no labeled prediction task.
 
-Developed with AI assistance. Results come from executed public data, with no invented observations or backdated history. Public GitHub CI will be checked on the scheduled publication day; it has not yet run for this local repository.
+Developed with AI assistance. Results come from executed public data, with no invented observations or backdated history. Actual GitHub CI is linked below; passing software checks do not establish field validity.
 
 
 ## GitHub publication
